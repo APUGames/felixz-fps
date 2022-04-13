@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7712069782577202924}
   - component: {fileID: 7712069782577202925}
   - component: {fileID: 7712069782577202914}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arm2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 7712069782673212115}
   - component: {fileID: 1022425553}
   - component: {fileID: 2310890416562498694}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd92f01d4c908cf428df5cd5f2d0f323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 100
+  hitPoints: 101
 --- !u!1 &7712069782839135305
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 7712069782838005833}
   - component: {fileID: 7712069782836875913}
   - component: {fileID: 7712069782841074761}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arm2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

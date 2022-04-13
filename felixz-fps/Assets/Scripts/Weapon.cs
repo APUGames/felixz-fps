@@ -36,9 +36,9 @@ public class Weapon : MonoBehaviour
 
             EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
 
-            target.TakeDamage(damage);
+            //Crashes whenever I shoot the floor because there's no health/damage for the floor
+            //target.TakeDamage(damage);
 
-            
             
         }
 

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField] Transform target;
     [SerializeField] float chaseRange = 5.0f;
+    [SerializeField] float turnSpeed = 5.0f;
 
     NavMeshAgent nMA;
 
@@ -14,15 +16,25 @@ public class EnemyAI : MonoBehaviour
 
     bool IsProvoked = false;
 
+    EnemyHealth health;
+
     // Start is called before the first frame update
     void Start()
     {
+        health = GetComponent<EnemyHealth>();
         nMA = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(health.IsDead())
+        {
+            enabled = false;
+            nMA.enabled = false;
+        }
+
+
         distanceToTarget = Vector3.Distance(target.position, transform.position);
 
         if(IsProvoked)
@@ -39,6 +51,8 @@ public class EnemyAI : MonoBehaviour
 
     private void EngageTarget()
     {
+        FaceTarget();
+
         if(distanceToTarget>=nMA.stoppingDistance)
         {
             ChaseTarget();
@@ -54,15 +68,31 @@ public class EnemyAI : MonoBehaviour
             GetComponent<Animator>().SetBool("attack", false);
             GetComponent<Animator>().SetTrigger("run");
             nMA.SetDestination(target.position);
+            
+            
         }
 
         private void AttackTarget()
         {
             GetComponent<Animator>().SetBool("attack", true);
             //temp for now
-            print(name + " ATTACKS " + target.name);
+            nMA.velocity = (new Vector3(0,0,0));
 
         }
+
+        private void FaceTarget()
+            {
+                Vector3 direction = (target.position - transform.position).normalized;
+                Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x,0,direction.z));
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime* turnSpeed);
+
+            }
+
+        public void OnDamageTaken()
+        {
+            IsProvoked = true;
+        }
+
     
 
 
